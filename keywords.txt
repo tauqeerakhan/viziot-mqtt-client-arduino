@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map For VizIoTMqttClient
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+VizIoTMqttClient	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+config 	KEYWORD2
+connect 	KEYWORD2
+loop 	KEYWORD2
+closeConnection 	KEYWORD2
+sendJsonString 	KEYWORD2
+reconnect 	KEYWORD2
+connected 	KEYWORD2
+listenCommand 	KEYWORD2
+VIZIOT_CALLBACK_SIGNATURE	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################

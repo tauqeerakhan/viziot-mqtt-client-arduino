@@ -1,0 +1,19 @@
+{
+    "name": "VizIoTMqttClient",
+    "keywords": "ethernet, mqtt, m2m, iot, viziot",
+    "description": "A client library for connect to MQTT server VizIoT.com. ",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/VizIoT-com/viziot-mqtt-client-arduino/upload"
+    },
+    "version": "1.0",
+    "examples": "examples/*/*.ino",
+    "frameworks": "arduino",
+    "platforms": [
+        "atmelavr",
+        "espressif"
+    ],
+    "dependencies": {
+        "pubsubclient": "^2.7"
+    }
+}

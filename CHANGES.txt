@@ -1,0 +1,4 @@
+1.0
+    * Sending JSON data to server
+    * Get commands from server
+    * Support and testing ESP8266
