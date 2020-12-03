@@ -8,7 +8,7 @@ This library extended PubSubClient https://github.com/knolleary/pubsubclient .
 The library comes with a number of example sketches. See File > Examples > VizIoTMqttClient
 within the Arduino application.
 
-Full API documentation is available here: http://viziot.com/pages/docs/
+Full API documentation is available here: http://viziot.com/docs/
 
 ## Compatible Hardware
 
