@@ -15,7 +15,7 @@ VizIoTMqttClient::VizIoTMqttClient(PubSubClient mqttClient) {
   this->_keyAndPassIsOk = false;
 
   this->_isListenCommands = false;
-  //Устанавливаем обработчик получения данных
+  // Set up a handler for receiving data
   this->_mqttClient.setCallback([this] (char* topic, byte * payload, unsigned int length) {
     this->_callback(topic, payload, length);
   });
@@ -29,7 +29,7 @@ byte VizIoTMqttClient::config(String key, String pass) {
 
 byte VizIoTMqttClient::config(String deviceKey, String devicePass, String mqttHost, int mqttPort) {
 
-  //Устанавливаем адрес MQTT брокера
+  // Set the address of the MQTT broker
   this->_host = mqttHost;
   this->_port = mqttPort;
   this->_mqttClient.setServer(this->_host.c_str(), this->_port);
@@ -58,14 +58,14 @@ bool VizIoTMqttClient::connected() {
 
 bool VizIoTMqttClient::connect() {
   while (this->connected() == false) {
-    // Попытка подключения
+    // Attempt to connect
     if (this->connectToBroker()) {
-      //Подключен
+      // Connected
       this->subscribe();
       return true;
     } else {
-      //не смогли, статус=        this->_mqttClient.state()
-      //попытка подключится через 5 секунд//
+      //failed,   статус= this->_mqttClient.state()
+      // try to connect in 5 seconds //
       delay(5000);
     }
   }
@@ -85,27 +85,26 @@ bool VizIoTMqttClient::sendJsonString(String jsonString) {
   if (jsonString.length() > 6) {
     return this->_mqttClient.publish(this->_topicForPublish.c_str(), jsonString.c_str());
   } else {
-    return false; // jsonString явно не JSON
+    return false; // jsonString is clearly not JSON
   }
 
 }
 
 void VizIoTMqttClient::reconnect() {
   while (!this->connected()) {
-    //    Попытка подключения MQTT:
-    // Попытка подключения
+    // Attempt to connect MQTT:
     if (this->connectToBroker()) {
       this->subscribe();
     } else {
-      //      не смогли, статус= this->_mqttClient.state()
-      //       попытка подключится через 5 секунд
-      delay(5000);
+      //      failed,статус= this->_mqttClient.state()
+      //       attempt to connect in 5 seconds
+       delay(5000);
     }
   }
 }
 
 void VizIoTMqttClient::loop() {
-  //Проверяем подключение к Брокеру
+  // Check the connection to the Broker
   if (!this->connected()) {
     this->reconnect();
   }
@@ -115,10 +114,10 @@ bool VizIoTMqttClient::subscribe() {
   if (this->connected()) {
     if (this->_isListenCommands) {
       if (this->_mqttClient.subscribe(this->_topicForSubscribe.c_str())) {
-        //Подписался на топик _topicForSubscribe
+        //// Subscribed to the topic
         return true;
       } else {
-        //Ошибка! не смог подписатся на топик  _topicForSubscribe
+        //Error! could not subscribe to the topic _topicForSubscribe
         return false;
       }
     }
@@ -133,7 +132,7 @@ bool VizIoTMqttClient::connectToBroker() {
     return false;
   }
 }
-//Обработка события получения данных
+// Handle the event of receiving data
 void VizIoTMqttClient::_callback(char* topic, byte* payload, unsigned int length) {
   //          if (compareTo(topic, (char*)topicLed.c_str())) {
   //            if ((char)payload[0] == '1') {
